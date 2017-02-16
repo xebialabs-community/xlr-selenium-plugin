@@ -14,10 +14,13 @@
     <!-- Plugin Task Configurations -->
     <type type="selenium.Task" extends="xlrelease.PythonScript" virtual="true">
         <property name="scriptLocation" default="selenium/SeleniumTask.py" hidden="true"/>
+        <property name="server" kind="string" category="input" label="Server" required="true"/>
         <property name="output" category="output" kind="string" size="large" label="Output" description="The output returned from execution of the task."/>
     </type>
 
-    <type type="selenium.ExecuteTest" extends="selenium.Task" label="Execute Test">
-        <property name="test_name" kind="string" category="input" label="Test Name" required="true"/>
+    <type type="selenium.ExecuteTestScript" extends="selenium.Task" label="Execute Test Script">
+        <property name="script_path" kind="string" category="input" label="Script" required="true"/>
     </type>
+
+    <type type="selenium.SeleniumExample" extends="selenium.Task" label="Run Example Selenium Test Script"/>
 </synthetic>
