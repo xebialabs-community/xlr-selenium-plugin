@@ -1,0 +1,10 @@
+language: java
+sudo: false
+deploy:
+    provider: releases
+    file: build/libs/xlr-selenium-plugin-1.0.0-beta.jar
+    skip_cleanup: true
+    on:
+        all_branches: true
+        tags: true
+        repo: xebialabs-community/xlr-selenium-plugin
