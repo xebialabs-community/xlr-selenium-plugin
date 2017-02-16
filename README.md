@@ -1,7 +1,7 @@
 # xlr-selenium-plugin
 
 [![Build Status](https://travis-ci.org/erasmussen39/xlr-selenium-plugin.svg?branch=master)](https://travis-ci.org/erasmussen39/xlr-selenium-plugin)
-[REPLACE ME WITH CODACY BADGE](https://www.codacy.com)
+[![Codacy](https://github.com/erasmussen39/xlr-selenium-plugin.git)
 [![Code Climate](https://codeclimate.com/github/erasmussen39/xlr-selenium-plugin/badges/gpa.svg)](https://codeclimate.com/github/erasmussen39/xlr-selenium-plugin)
 [![License: MIT][xlr-selenium-plugin-license-image] ][xlr-selenium-plugin-license-url]
 [![Github All Releases][xlr-selenium-plugin-downloads-image]]()
