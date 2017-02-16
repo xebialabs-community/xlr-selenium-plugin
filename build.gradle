@@ -1,8 +1,15 @@
+buildscript {
+    dependencies {
+        classpath "gradle.plugin.com.hierynomus.gradle.plugins:jython-gradle-plugin:0.4.0"
+    }
+}
+
 plugins {
     id "com.github.hierynomus.license" version "0.13.0"
 }
 
 defaultTasks 'build'
+apply plugin: "com.github.hierynomus.jython"
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
@@ -12,7 +19,15 @@ version='1.0.0-beta'
 license {
     header rootProject.file('License.md')
     strictCheck false
-    excludes(["**/*.json"])
+    excludes(["**/*.json", "**/selenium/*"])
     ext.year = Calendar.getInstance().get(Calendar.YEAR)
     ext.name = 'XEBIALABS'
+}
+
+jython {
+    sourceRepositories += 'https://pypi.python.org/packages/source/${dep.name[0]}/${dep.name}/${dep.name.replaceAll(\'-\', \'_\')}-${dep.version}.tar.gz'
+}
+
+dependencies {
+    jython ":selenium:3.4.3"
 }
