@@ -14,6 +14,7 @@
     <!-- Plugin Task Configurations -->
     <type type="selenium.Task" extends="xlrelease.PythonScript" virtual="true">
         <property name="scriptLocation" default="selenium/SeleniumTask.py" hidden="true"/>
+        <property name="iconLocation" default="selenium/selenium-logo.png" hidden="true"/>
         <property name="server" kind="string" category="input" label="Server" required="true"/>
         <property name="output" category="output" kind="string" size="large" label="Output" description="The output returned from execution of the task."/>
     </type>
@@ -22,5 +23,8 @@
         <property name="script_path" kind="string" category="input" label="Script" required="true"/>
     </type>
 
-    <type type="selenium.SeleniumExample" extends="selenium.Task" label="Run Example Selenium Test Script"/>
+    <type type="selenium.SeleniumTest" extends="xlrelease.PythonScript" label="Run Selenium Test Script">
+        <property name="scriptLocation" default="selenium/python-selenium.py" hidden="true"/>
+        <property name="output" category="output" kind="string" size="large" label="Output"/>
+    </type>
 </synthetic>
