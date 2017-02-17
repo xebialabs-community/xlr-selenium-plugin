@@ -14,12 +14,20 @@
     <!-- Plugin Task Configurations -->
     <type type="selenium.Task" extends="xlrelease.PythonScript" virtual="true">
         <property name="scriptLocation" default="selenium/SeleniumTask.py" hidden="true"/>
+        <property name="iconLocation" default="selenium/selenium-logo.png" hidden="true"/>
+        <property name="taskColor" hidden="true" default="#518C4F"/>
         <property name="server" kind="string" category="input" label="Server" required="true"/>
         <property name="output" category="output" kind="string" size="large" label="Output" description="The output returned from execution of the task."/>
     </type>
 
     <type type="selenium.ExecuteTestScript" extends="selenium.Task" label="Execute Test Script">
         <property name="script_path" kind="string" category="input" label="Script" required="true"/>
+        <property name="webDriverHub" kind="string" category="input" label="webDriver Hub URL" required="true" description="URL for Selenium WebDriver hub"/>
+        <property name="webBrowser" kind="string" category="input" label="Web Browser" required="true" description="Browser(s) that you want to test for"/>
+        <property name="startingUrl" kind="string" category="input" label="Starting URL" required="false" description="For Test Suites, the starting test URL"/>
+        <property name="testSuite" kind="string" category="input" label="Test Suite Location" required="false" description="Location of Test Suite files"/>
+        <property name="numberFailurePercentThreshold" kind="string" category="input" label="Failed Test Threshold" required="false" description="If you want to programatically take action on test results"/>
+        <property name="testResults" kind="string" category="output" label="Selenium Test Results" description="The output returned from execution of the task."/>
     </type>
 
     <type type="selenium.SeleniumExample" extends="selenium.Task" label="Run Example Selenium Test Script"/>
