@@ -1,8 +1,8 @@
 # xlr-selenium-plugin
 
-[![Build Status](https://travis-ci.org/erasmussen39/xlr-selenium-plugin.svg?branch=master)](https://travis-ci.org/erasmussen39/xlr-selenium-plugin)
+[![Build Status](https://travis-ci.org/xebialabs-community/xlr-selenium-plugin.svg?branch=master)](https://travis-ci.org/xebialabs-community/xlr-selenium-plugin)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b19a0cb98fba4b9cb7b6a17b67dbd4eb)](https://www.codacy.com/app/erasmussen39/xlr-selenium-plugin?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=erasmussen39/xlr-selenium-plugin&amp;utm_campaign=Badge_Grade)
-[![Code Climate](https://codeclimate.com/github/erasmussen39/xlr-selenium-plugin/badges/gpa.svg)](https://codeclimate.com/github/erasmussen39/xlr-selenium-plugin)
+[![Code Climate](https://codeclimate.com/github/xebialabs-community/xlr-selenium-plugin/badges/gpa.svg)](https://codeclimate.com/github/xebialabs-community/xlr-selenium-plugin)
 [![License: MIT][xlr-selenium-plugin-license-image]][xlr-selenium-plugin-license-url]
 [![Github All Releases][xlr-selenium-plugin-downloads-image]]()
 
