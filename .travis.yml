@@ -1,10 +1,17 @@
 language: java
 sudo: false
 deploy:
-    provider: releases
-    file: build/libs/xlr-selenium-plugin-1.0.0-beta.jar
-    skip_cleanup: true
-    on:
-        all_branches: true
-        tags: true
-        repo: xebialabs-community/xlr-selenium-plugin
+  provider: releases
+  file: build/libs/xlr-selenium-plugin-1.0.0-beta.jar
+  skip_cleanup: true
+  on:
+    all_branches: true
+    tags: true
+    repo: xebialabs-community/xlr-selenium-plugin
+  api_key:
+    secure:
+      secure: DNlHoLtaustmjJV3lmQ1Fym+sQUuBQ4aH0HOONTdgCs35XXPCKlIaE3QfxnH90ti7PX1Hq+KdX1Af0rjsS3I8cewPk5lCJ3A/hv8d4LRbsmasGAjohrgPGo+qnXXM06DAzDaxUVEoJ5dQyz8lisqlqQr/1Jnwh3QsR50OxRkeIeYyiyZs2jvOhshMHnOs/tR5WFbKp9MR6oincyncHWLJtLRROFwAD4PZUPfnFOQAGjOMvy85t6QwOryhRuJz05I+zgwz1Wks+iMFnZL6wxFiubZ1+o1vvt8z9NKWO/v0PbEIdnBBE/m5DxnquIJTQaBcAIrZFqFY2Ans6GdA21h/wAfs8/kyIhRNIKMvJiHo/03OdGPT2QWcdm9OLYl7FYUnQlRetiZDXgWep3NpVjdoAU31dIej7VAKSDRptmthuhqIC1Ox7MI8d+g6QMn//tcSA/PNERlSQRwPsauqLdsBoPXVFxAjEZ5xuvtF9WQQP0l92UQs+FY9Q7IWTJ6U9oEOp0u5X4a+TV6/2aEY4x7ofJg9567EAyAdg6cHUYN9gM8cI7Bby1yTjyMAT1xneeGZJZTpwPpcsB82vAtx0OlSCinaiJDSmnaFZ73O+XzJexCxYfSmBW+aAqO/nEQh64dq5spuEMWQ03efLTO3+UQNMM7C6GdivNTwWlsytZCIhY=
+notifications:
+  hipchat:
+    rooms:
+      secure: J9EY6bKsCPo2o5sRnMgc7EikObAGIeRm/2OX/0/NfJc42wywQXN74Gkfa0/lFZERKcPFv3Xy2uhVO2ityk9wYjeqq+VKgaKLfi5XLo4pkbcT8cAY1zKF9WWSABANUGSqAhFl0dbth+CSJOTIe/nIFW6E8yZ85/LThFeKKkuWj6rlvtVHS2xAjQR8Kxi/Lz0jObksfc9rmm0/EdJn5ZUx/6oN02YEf6MyHPRG//RzXgNUyQrVKrhBwq8yOz1gz6yEoi7RpUyhyeiY0Wyn8+1VWnj8b/8UjQXy+TBga2MgqHOGofSo7el1pbRhy+URvDZzIovL+KsNrmHMsaqbwfuDeiHb0+wehb29rxm2cOg/AlCeNllM8Skb3W3sj0MkGYviITObxuz9/ghnM/nrnCWkmkvEdo5hHiysM82SaQ5cEnZEGDpaGlLMU6rQ7N5Ay3jqCk+RJydTYqg+ofvbWdNnM2zL0cdZf/8N8TGtHo2kN111TeHjnn3ulGGR2XwvU4IUiUvhHITXPWBLcCagfd6XdQK6aJPTArll6Fo7n//GHpY+lNdkxdd1SnQRZL7sOzqHKPHX3br4ASP/pcSIJZksexTqVnieSNvZm6d0l20IQnS/6CJrauXXorHuDzwLKFiVvvx+/SSRY66o5O9OrPGH5OGkovPoC1xqTwDCtV6gP1o=
