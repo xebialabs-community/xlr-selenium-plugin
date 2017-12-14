@@ -1,0 +1,36 @@
+#
+# THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
+# FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
+#
+
+python-selenium:
+  image: xebialabs/python-selenium:latest
+  links:
+    - hub
+hub:
+  image: selenium/hub:3.8.1-aluminum
+  ports:
+    - "4444:4444"
+xlr:
+  image: xebialabs/xlr_dev_run:v7.2.0.1
+  volumes:
+    - ~/xl-licenses:/license
+    - ./../../../../:/data
+  ports:
+    - "15516:5516"
+  links:
+    - hub
+    - python-selenium
+firefox:
+  image: selenium/node-firefox-debug:3.8.1-aluminum
+  links:
+    - hub
+  ports:
+    - "5900:5900"
+chrome:
+  image: selenium/node-chrome-debug:3.8.1-aluminum
+  links:
+    - hub
+  ports:
+    - "5901:5900"

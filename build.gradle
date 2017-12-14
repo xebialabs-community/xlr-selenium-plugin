@@ -1,5 +1,6 @@
 plugins {
     id "com.github.hierynomus.license" version "0.13.0"
+    id "com.xebialabs.xl.docker" version "1.1.0"
 }
 
 defaultTasks 'build'
@@ -8,6 +9,14 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
 version='1.0.0-beta'
+
+xlDocker {
+  compileImage = 'xebialabs/xlr_dev_compile'
+  compileVersion = 'v7.2.0.1'
+  runImage = 'xebialabs/xlr_dev_run'
+  runVersion = 'v7.2.0.1'
+  runPortMapping = '15516:5516'
+}
 
 license {
     header rootProject.file('License.md')

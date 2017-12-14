@@ -11,27 +11,20 @@
            xmlns="http://www.xebialabs.com/deployit/synthetic"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <!-- Plugin Task Configurations -->
-    <type type="selenium.Task" extends="xlrelease.PythonScript" virtual="true">
-        <property name="scriptLocation" default="selenium/SeleniumTask.py" hidden="true"/>
+    <type type="selenium.RunPythonTestCase" extends="xlrelease.PythonScript" description="Run a basic selenium testcase using the selenium-python dialect.">
+        <property name="scriptLocation" default="selenium/RunTestCase.py" hidden="true"/>
         <property name="iconLocation" default="selenium/selenium-logo.png" hidden="true"/>
         <property name="taskColor" hidden="true" default="#518C4F"/>
-        <property name="server" kind="string" category="input" label="Server" required="true"/>
-        <property name="output" category="output" kind="string" size="large" label="Output" description="The output returned from execution of the task."/>
+
+        <property name="testCase" category="input" size="large" required="true" label="Python Test Case" description="Specify your python-selenium testcase here. You can assume that a 'driver' object is made available for you before your testcase and the driver is closed afterwards."/>
+        <property name="seleniumProfile" kind="ci" referenced-type="selenium.Profile" category="input" label="Selenium Profile" required="true" description="The profile used to determine the context where and how to execute the test case. See shared configuration."/>
     </type>
 
-    <type type="selenium.ExecuteTestScript" extends="selenium.Task" label="Execute Test Script">
-        <property name="script_path" kind="string" category="input" label="Script" required="true"/>
-        <property name="webDriverHub" kind="string" category="input" label="webDriver Hub URL" required="true" description="URL for Selenium WebDriver hub"/>
-        <property name="webBrowser" kind="string" category="input" label="Web Browser" required="true" description="Browser(s) that you want to test for"/>
-        <property name="startingUrl" kind="string" category="input" label="Starting URL" required="false" description="For Test Suites, the starting test URL"/>
-        <property name="testSuite" kind="string" category="input" label="Test Suite Location" required="false" description="Location of Test Suite files"/>
-        <property name="numberFailurePercentThreshold" kind="string" category="input" label="Failed Test Threshold" required="false" description="If you want to programatically take action on test results"/>
-        <property name="testResults" kind="string" category="output" label="Selenium Test Results" description="The output returned from execution of the task."/>
+    <type type="selenium.Profile" extends="xlrelease.Configuration" label="Selenium Profile">
+        <property name="commandExecutor" default="http://hub:4444/wd/hub" />
+        <property name="password" password="true" label="Password for the remote host" description="When using a remote host, override the password to the remote host here."/>
+        <property name="desiredCapabilities" kind="map_string_string" />
+        <property name="host" kind="ci" referenced-type="host.Unix" category="input" label="Host to run on. If not specified, will run on localhost." required="false"/>
     </type>
-
-    <type type="selenium.SeleniumTest" extends="xlrelease.PythonScript" label="Run Selenium Test Script">
-        <property name="scriptLocation" default="selenium/python-selenium.py" hidden="true"/>
-        <property name="output" category="output" kind="string" size="large" label="Output"/>
-    </type>
+ 
 </synthetic>
