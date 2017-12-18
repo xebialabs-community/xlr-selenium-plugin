@@ -21,7 +21,7 @@
   {
     "id": "Configuration/Custom/Configuration2139581",
     "type":"selenium.Profile",
-    "title":"hub",
+    "title":"hub-firefox-profile",
     "password": "xebialabs",
     "commandExecutor":"http://hub:4444/wd/hub",
     "desiredCapabilities": {
@@ -31,7 +31,7 @@
   {
     "id": "Configuration/Custom/Configuration2139583",
     "type":"selenium.Profile",
-    "title":"hub",
+    "title":"hub-chrome-profile",
     "password": "xebialabs",
     "commandExecutor":"http://hub:4444/wd/hub",
     "desiredCapabilities": {

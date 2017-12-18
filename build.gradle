@@ -8,7 +8,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
-version='1.0.0-beta'
+version='1.1.0-beta'
 
 xlDocker {
   compileImage = 'xebialabs/xlr_dev_compile'
@@ -21,7 +21,6 @@ xlDocker {
 license {
     header rootProject.file('License.md')
     strictCheck false
-    excludes(["**/*.json", "**/selenium/*"])
     ext.year = Calendar.getInstance().get(Calendar.YEAR)
     ext.name = 'XEBIALABS'
 }
