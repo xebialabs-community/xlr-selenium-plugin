@@ -46,6 +46,7 @@ The **Selenium: Run Python Test Case** task type runs Selenium test scripts spec
 
 1. Run the build.sh in the ```python-selenium-docker-image```
 2. Run ```./gradlew runDockerCompose```
+3. Make sure that the two Selenium profiles in Shared Configuration are linked to the python-selenium host (should happen automatically- but not reliably?).
 
 ## References:
 * [Selenium WebDriver](http://www.seleniumhq.org/projects/webdriver/)
