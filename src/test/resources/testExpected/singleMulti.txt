@@ -1,0 +1,4 @@
+{
+        "${multipleTestJson}": "[{result=Passed, output=In setUp\nIn simple\nIn tearDown, additionalStream=  Ran 1 test in 7.752s  \nOK, testName=test1}, {result=Passed, output=In setUp\nIn simple\nIn tearDown, additionalStream=  Ran 1 test in 7.749s  \nOK, testName=test2}, {result=Passed, output=In setUp\nIn simple\nIn tearDown, additionalStream=  Ran 1 test in 7.422s  \nOK, testName=test3}]",
+        "${singleTestJson}": "[{result=Passed, output=In setUp\nIn simple\nIn tearDown, additionalStream=  Ran 1 test in 8.829s  \nOK, testName=test0}]"
+    }

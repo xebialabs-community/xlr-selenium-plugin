@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-MAINTAINER "vlussenburg@xebialabs.com"
+LABEL maintainer="vlussenburg@xebialabs.com"
 
 RUN apt-get -qq update -y && apt-get -qq install -y --no-install-recommends supervisor openssh-server python python-pip && pip install selenium && rm -rf /var/lib/apt/lists/*
 

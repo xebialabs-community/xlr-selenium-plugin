@@ -16,19 +16,23 @@ from com.xebialabs.overthere.local import LocalConnection
 from com.xebialabs.overthere.util import CapturingOverthereExecutionOutputHandler, OverthereUtils
 from java.io import StringWriter, PrintWriter
 from java.lang import String
+import logging
+
+logger = logging.getLogger(__name__)
 
 class SeleniumRunner():
     def __init__(self, script, connectionType=None, host=None, password=None):
-        self.logger = getattr(__builtin__, 'logger', None)
+        self.logger = logger
+        self.logger.debug("In Selenium Runner init")
         self.script = script
         
         self.connectionType = connectionType
 
         if host:
             self.options = ConnectionOptions()
-            self.options.set(ConnectionOptions.USERNAME, host.getProperty('username'))
+            self.options.set(ConnectionOptions.USERNAME, host.get("username"))
             self.options.set(ConnectionOptions.PASSWORD, password)
-            self.options.set(ConnectionOptions.ADDRESS, host.getProperty('address'))
+            self.options.set(ConnectionOptions.ADDRESS, host.get("address"))
             self.options.set(ConnectionOptions.OPERATING_SYSTEM, OperatingSystemFamily.UNIX)
             self.options.set(SshConnectionBuilder.CONNECTION_TYPE, SshConnectionType.SCP)
         else:

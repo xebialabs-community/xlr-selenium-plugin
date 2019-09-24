@@ -13,20 +13,38 @@
            xmlns="http://www.xebialabs.com/deployit/synthetic"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <type type="selenium.RunPythonTestCase" extends="xlrelease.PythonScript" description="Run a basic selenium testcase using the selenium-python dialect.">
-        <property name="scriptLocation" default="selenium/RunTestCase.py" hidden="true"/>
-        <property name="iconLocation" default="selenium/selenium-logo.png" hidden="true"/>
+    <type type="selenium.Task" extends="xlrelease.PythonScript" virtual="true">
+        <property name="iconLocation" default="selenium/selenium-logo.png" hidden="true" />
         <property name="taskColor" hidden="true" default="#518C4F"/>
 
-        <property name="testCase" category="input" size="large" required="true" label="Python Test Case" description="Specify your python-selenium testcase here. You can assume that a 'driver' object is made available for you before your testcase and the driver is closed afterwards."/>
-        <property name="seleniumProfile" kind="ci" referenced-type="selenium.Profile" category="input" label="Selenium Profile" required="true" description="The profile used to determine the context where and how to execute the test case. See shared configuration."/>
+        <property name="host" kind="ci" referenced-type="host.Unix" category="input" label="Unix host where scripts will run. If not specified, scripts will run on localhost." required="false"/>
+        <property name="hostPassword" password="true" category="input" label="Password for the remote Unix host" description="When using a remote host to run scripts, override the password here." required="false"/>
+        
     </type>
 
-    <type type="selenium.Profile" extends="xlrelease.Configuration" label="Selenium Profile">
-        <property name="commandExecutor" default="http://hub:4444/wd/hub" />
-        <property name="password" password="true" label="Password for the remote host" description="When using a remote host, override the password to the remote host here."/>
-        <property name="desiredCapabilities" kind="map_string_string" />
-        <property name="host" kind="ci" referenced-type="host.Unix" category="input" label="Host to run on. If not specified, will run on localhost." required="false"/>
+    <type type="selenium.RunSinglePythonTestCase" extends="selenium.Task" description="Run a single selenium testcase using the selenium-python dialect.">
+        <property name="scriptLocation" default="selenium/RunTestCases.py" hidden="true"/>
+
+        <property name="testCaseName" category="input" required="true" label="Test Case Name" description="Give the test case a name"/>
+        <property name="testCase" category="input" size="large" required="true" label="Python Test Case" description="Put selenium-python test case code here."/>
+        <property name="outputJson" category="output" kind="string" label="Report in JSON format"/>
+    </type>
+
+    <type type="selenium.RunScriptsRetrievedFromRepository" extends="selenium.Task" description="Retrieve one or more selenium-python test scripts from a remote repository then run the test cases.">
+        <property name="scriptLocation" default="selenium/RunTestCases.py" hidden="true"/>
+        
+        <property name="targetURL" category="input" required="true" label="Script Repository Target URL with placeholder" 
+            description="Abstracted URL for the script file. Use the special place holder :filename:. Examples: https://server.com/foo/:filename:,  http://host/project1/repo1/:filename:?raw"/>
+        <property name="repositoryUsername" category="input" label="Script Repository Username"  required="false"/>
+        <property name="repositoryPassword" category="input" label="Script Respository Password" password="true" required="false"/>
+        
+        <property name="fileMap" category="input" kind="map_string_string" required="true" label="Test Name, File Name" 
+            description = "Give each test script a name and then enter the file name (including the extension as the value."/>
+        <property name="failIfFileNotFound" category="input" kind="boolean" default="false" required="true" label="Fail if file not found" 
+            description = "If checked, the task will fail if any one of the files listed above is not found."/>
+        <property name="failOnFirstFailure" category="input" kind="boolean" default="false" required="true" label="Fail on first test failure" 
+            description = "If checked, the task will fail on the first test failure and stop running. The default behavior is to run and report on all tests and fail the task if there is least one test failure."/>
+        <property name="outputJson" category="output" kind="string" label="Report in JSON format"/>
     </type>
  
 </synthetic>
