@@ -16,3 +16,4 @@ temp/
 *.log
 supervisord.*
 .classpath
+deploy_key

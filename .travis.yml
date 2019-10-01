@@ -3,14 +3,28 @@ jdk: oraclejdk9
 notifications:
   slack:
     secure: R9rabV1tVHFE6+3EyNeM5FxPtcHA5kJG+ta1NsbY8jhkoTB/JC+/Cm7TAFZrIbqYJrbKgaAnimDyhb8vnyTYT4zXrIZyulOaKHhf75rueFG0zcg3I1N0DUCvgTmgnVhleFnlRLfNlWpULjHLgNn379Rvn3/lFEQkx8hpLrZd6i+zsjFhePIRLLkxmrCYoNjeQ7yjtBOX6aJU2PfhbBnRafC36m4FuDJWtGO0sJRu9soN5fJCuSleqz9/KliYR4jtjO6bWqOrXvFWnLn8wg1dIjQKpp4+qgkd2eOPd6dWHl2y93nT1QXYW7TOLjLGd6CwC/lQAVufSv9yz4fze5YMLIKnAxWcCfaPY7XQBMliKKsTb3JtZ2n2HAPK1+GOzoMZE3StUs+ID9d2+7RJaXDQfOfHjfUteya8Cz88H6KEZ5wML815S6oDPDKxIMjUq+R6W3wi0lbkO14F5jo86nu3SxwAOSREemdRzpBIeXJtCLAJhXdE1n9EqUH03NVehNMKuQtwlQEoMw3MIzWkg4JjP7XGtqWtX1X72Qc0dIDcgWNJwrVEIWk4hDzFQU862tIfLRUWEveJledNJ44AAq5O6K6MRG3DQd3ikR/uWD4aCDgQER+9DOwvqNPOvrMbAm346eQki7X13Co0yCyhL01Q6DasHpnOkG4Cg1osO4iz4S0=
+before_install:
+  - openssl aes-256-cbc -K $encrypted_e8c13656a88c_key -iv $encrypted_e8c13656a88c_iv
+    -in deploy_key.enc -out ./deploy_key -d
+  - eval "$(ssh-agent -s)"
+  - echo -e "Host $DIST_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - chmod 600 /tmp/deploy_key
+  - ssh-add /tmp/deploy_key
 deploy:
-  provider: releases
-  api_key:
-    secure: QLSkR9lfV2ySMI9Pkb/yQ0mNTve5rxEeZmEb8QfZ/bqieiT/ZXAoEfHgJOSp64nIULd/wxRpVmysSkh27EOEtoM2Zk8qJPScT7zYeuHUE+IL84x4zw0Z2AFWGxixDuHwo/y46axlUPAWvpK1Fanncbz2vcbw3ABodGRwhcTOlFUPG/abXRH9AqhmmAnyw/xtsNCnVruB4FYVuHCmH9zDiiMhq92ZLDnxG6gFeJA3NVhldSMVbHBnNOpYpFXbblg/MgbJSIak07qPoPA0QYErDHi0igrBUpXAJnTbAJvqRXaZSQTzgIeSoxESV7QZNXnQhC/u/5cZkxl/KObDvkGzgCq43Oo0WutHwcC4RNKo9ASALuxZ1Ea066vnMzqHAOVZ2KDvUF3pMcxu940/GzsNQAh3TwiIcCIvNIoyUFj9t1wh+ykoKewbhYWOIcCRNTfYyYLGd/gYJ85hno4U8AQNm54V1hXvzTNj5gT5gmKP5hyiPbDTQqX2yIzPLWSIMVbMg4V2VC9J6LywSSIDzmVO+P/AcA1hHwRzZSHU5Lq0GPMisjfRajPL57uSyIkDpkROSJW/To7TR0d6y+3et6pAfdtxlTEDFg7OH5m8HFQXez4U12hP9NINP8k5XE+rmIagi/e68YauPCNT0k/Q5L8VFTOL6MuttrVQJM797ebBtK0=
-  file_glob: true
-  file: build/libs/*
-  skip_cleanup: true
-  on:
-    all_branches: true
-    tags: true
-    repo: xebialabs-community/xlr-selenium-plugin
+  - provider: releases
+    api_key:
+      secure: QLSkR9lfV2ySMI9Pkb/yQ0mNTve5rxEeZmEb8QfZ/bqieiT/ZXAoEfHgJOSp64nIULd/wxRpVmysSkh27EOEtoM2Zk8qJPScT7zYeuHUE+IL84x4zw0Z2AFWGxixDuHwo/y46axlUPAWvpK1Fanncbz2vcbw3ABodGRwhcTOlFUPG/abXRH9AqhmmAnyw/xtsNCnVruB4FYVuHCmH9zDiiMhq92ZLDnxG6gFeJA3NVhldSMVbHBnNOpYpFXbblg/MgbJSIak07qPoPA0QYErDHi0igrBUpXAJnTbAJvqRXaZSQTzgIeSoxESV7QZNXnQhC/u/5cZkxl/KObDvkGzgCq43Oo0WutHwcC4RNKo9ASALuxZ1Ea066vnMzqHAOVZ2KDvUF3pMcxu940/GzsNQAh3TwiIcCIvNIoyUFj9t1wh+ykoKewbhYWOIcCRNTfYyYLGd/gYJ85hno4U8AQNm54V1hXvzTNj5gT5gmKP5hyiPbDTQqX2yIzPLWSIMVbMg4V2VC9J6LywSSIDzmVO+P/AcA1hHwRzZSHU5Lq0GPMisjfRajPL57uSyIkDpkROSJW/To7TR0d6y+3et6pAfdtxlTEDFg7OH5m8HFQXez4U12hP9NINP8k5XE+rmIagi/e68YauPCNT0k/Q5L8VFTOL6MuttrVQJM797ebBtK0=
+    file_glob: true
+    file: build/libs/*
+    skip_cleanup: true
+    on:
+      all_branches: true
+      tags: true
+      repo: xebialabs-community/xlr-selenium-plugin
+  - provider: script
+    skip_cleanup: true
+    script: rsync --update -raz -i $TRAVIS_BUILD_DIR/libs/*.jar $DIST_USER@$DIST_HOST:$DIST_PATH/${TRAVIS_REPO_SLUG#*/}/
+    on:
+      all_branches: true
+      tags: true
+      repo: xebialabs-community/xlr-selenium-plugin
