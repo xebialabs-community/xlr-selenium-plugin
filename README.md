@@ -144,7 +144,7 @@ The test will set up a temporary python-selenium/selenium grid hub/xlr/selenium 
 
 ### To run demo or dev version (set up the docker containers and leave them running) -
 1.  For requirements, see the 'To run integration tests' above
-2.  Build the xlr-selenium-plugin.jare - Open a terminal and cd into <xlr-selenim-plugin code base> and run ./gradlew clean build . Be sure to re-run the command whenever code is changed. 
+2.  Build the xlr-selenium-plugin.jar - Open a terminal and cd into <xlr-selenim-plugin code base> and run ./gradlew clean build . Be sure to re-run the command whenever code is changed. 
 3.  From another terminal, cd into the <xlr-selenim-plugin code base>/src/test/resources/docker/  directory. 
 4.  Run (necessary the first time only): docker-compose build
 5.  Then run: docker-compose up -d 
