@@ -163,9 +163,8 @@ The test will set up a temporary python-selenium/selenium grid hub/xlr/selenium 
 10. When code is modified, re-run the ./gradlew clean build (in the first terminal), then refresh the testbed by running docker-compose down followed by docker-compose up -d (in the second terminal) and after XL Release starts up, re-import the server configuration and the template
 
 Further Demo/Dev Notes:
-1. 
-2. The log file for the plugin - selenium-plugin.log will be persisted to the local directory <xlr-selenim-plugin code base>/build/reports/tests/log directory.
-3. The Mockserver runs on the [localhost port 5099](http://localhost:5099/)
-4. The example script files used in the demo are located in the <xlr-selenim-plugin code base>/src/test/resources/mockserver/responses directory
-5. If you add example scripts, be sure to rebuild the mockserver docker image
+1. The log file for the plugin - selenium-plugin.log will be persisted to the local directory <xlr-selenim-plugin code base>/build/reports/tests/log directory.
+2. The Mockserver runs on the [localhost port 5099](http://localhost:5099/)
+3. The example script files used in the demo are located in the <xlr-selenim-plugin code base>/src/test/resources/mockserver/responses directory
+4. If you add example scripts, be sure to rebuild the mockserver docker image
 
