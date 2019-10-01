@@ -76,8 +76,8 @@ public class SeleniumIntegrationTest {
             JSONObject selJObj = (JSONObject) selTest;
             assertTrue(((String) selJObj.get("result")).equals("Passed"));
         } 
-        
-        System.out.println("/ntestSelenium passed");
+        System.out.println("");
+        System.out.println("testSelenium passed");
 
     }
 
