@@ -39,7 +39,7 @@ public final class SeleniumTestHelper {
     private static RequestSpecification httpRequest = null;
     private static final String IMPORT_CONFIG = "/config";
     private static final String IMPORT_TEMPLATE = "/templates/import";
-    private static final String START_RELEASE_SELENIUM = "/templates/Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/start";
+    private static final String START_RELEASE_SELENIUM = "/templates/Applications/Release832b197247d146298a22732556c67e80/start";
     private static final String GET_RELEASE_PREFIX = "/releases/";
     private static final String GET_VARIABLES_SUFFIX = "/variableValues";
     
@@ -56,8 +56,8 @@ public final class SeleniumTestHelper {
     }
 
     public static void initializeXLR() throws InterruptedException{
-        System.out.println("Pausing for 1 minute, waiting for XLR to start. ");
-        Thread.sleep(60000);
+        System.out.println("Pausing for 1.5 minutes, waiting for XLR to start. ");
+        Thread.sleep(90000);
 
         // Load server config for the python/selenium server where scripts are run
         try {
@@ -119,8 +119,8 @@ public final class SeleniumTestHelper {
 
         ///////// Get Archived responses
         // Sleep so XLR can finish processing releases
-        System.out.println("Pausing for 1 minute, waiting for release to complete. If most requests fail with 404, consider sleeping longer.");
-        Thread.sleep(60000);
+        System.out.println("Pausing for 2 minutes, waiting for release to complete. If most requests fail with 404, consider sleeping longer.");
+        Thread.sleep(120000);
         //////////
         response = given().auth().preemptive().basic("admin", "admin")
         .header("Content-Type", "application/json")
@@ -149,7 +149,7 @@ public final class SeleniumTestHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("resourcePath = " + resourcePath);
+        //System.out.println("resourcePath = " + resourcePath);
         return resourcePath;
     }
 

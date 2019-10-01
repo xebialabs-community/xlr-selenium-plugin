@@ -8,7 +8,7 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-import sys, json, __builtin__
+import sys
 from selenium.SeleniumRunner import SeleniumRunner
 from selenium.RemoteScriptRetriever import RemoteScriptRetriever
 import json
@@ -16,84 +16,80 @@ import logging
 import os
 
 logger = logging.getLogger(__name__)
-allScriptsDict = {}
-finalOutputList = ['## Results Report',' ','Test Name | Pass/Fail', ':---: | :---:']
-finalDetailsList = []
-finalExitCode = 0
+
+class RunTestCases():
+    def __init__(self, allScriptsDict, runRemote, host=None, password = None, failOnFirstFailure=True):
+        self.logger = logger
+        self.allScriptsDict = allScriptsDict
+        self.runRemote = runRemote
+        self.host = host
+        self.password = password
+        self.failOnFirstFailure = failOnFirstFailure
+        self.logger.debug("In RunTestCases init")
 
 
-# Determine if running a single script or retrieving multiple scripts
-# then store test script in allScriptsDict
-method = str(task.getTaskType())
-if method == "selenium.RunScriptsRetrievedFromRepository":
-    scriptRetriever = RemoteScriptRetriever(targetURL, repositoryUsername, repositoryPassword, failIfFileNotFound)
-    logger.debug("targertURL = %s, repositoryUsername=%s,  repositoryPassword=%s, failIfFileNotFound=%s" %
-        (targetURL, repositoryUsername, repositoryPassword, str(failIfFileNotFound)))
-    for key in fileMap:
-        allScriptsDict.update({key:scriptRetriever.getData(fileMap[key])})
-elif method == "selenium.RunSinglePythonTestCase":
-    allScriptsDict.update({testCaseName:testCase})
+    def runTests(self):
+        finalOutputList = ['## Results Report',' ','Test Name | Pass/Fail', ':---: | :---:']
+        finalDetailsList = []
+        finalExitCode = 0
 
-# Determine if we will execute scripts remotely and which password to use
-password = ''
-runRemote = False
-if host:
-    runRemote = True
-    if hostPassword:
-        password = hostPassword
-    else:
-        password = host.get("password")
+        # Run tests stored in allScriptsDict
+        for key in self.allScriptsDict:
+            currentTestName = key
+            currentTestCase = self.allScriptsDict[key]
+            if self.runRemote:
+                selRunner = SeleniumRunner(currentTestCase, "ssh", self.host, self.password)
+            else:
+                selRunner = SeleniumRunner(currentTestCase)
+            exitCode = selRunner.execute()
+            
+            # assume passing
+            outcome = 'Passed'
+            if exitCode !=0:
+                # If test failed, we will set finalExitCode to error exitCode. Depending upon configuration,
+                # we may continue testing but finalExitCode will never be set back to 0
+                # because we ultimately want the whole task to fail upon completion of tests.
+                finalExitCode = exitCode
+                outcome = 'Failed'
+            elif len(currentTestCase) == 0:
+                outcome = 'Not Found'
+            output = selRunner.getStdout()
+            additionalStream = selRunner.getStderr()
+            finalOutputList.append("%s|%s" % 
+                (currentTestName, outcome))
+            detailObject = {}
+            detailObject.update({'testName': key})
+            
+            detailObject.update({'result': outcome})
+            detailObject.update({'output': output})
+            if detailObject['result'] == 'Passed':
+                addStr = additionalStream.replace('-','').replace('.','',1).replace('\n\n', '  \n').replace('\n','',1)
+            else:
+                addStr = additionalStream.replace('===','').replace('-','').replace('\n\n', '  \n').replace(' \n \n','\n').replace(' \n  \n','\n')
+            detailObject.update({'additionalStream': addStr})
+            logger.debug('About to append detailObject - %s' % detailObject)
+            finalDetailsList.append(detailObject)
+            if self.failOnFirstFailure and finalExitCode != 0:
+                break
+        
+        # print table
+        for item in finalOutputList:
+            print(item)
+        # print details
+        print(' ')
+        for item in finalDetailsList:
+            print(' ---  ')
+            print(' ### %s : %s  ' % (item['testName'], item["result"]))
+            print(' %s :  ' % ('Script Output'))
+            print('>%s   ' % ( item["output"]))
+            print('  ')
+            print('  %s :  ' % ('Additional Information'))
+            print('>%s   ' % ( item["additionalStream"]))
+            print('  ')
 
-# Run tests stored in allScriptsDict
-for key in allScriptsDict:
-    currentTestName = key
-    currentTestCase = allScriptsDict[key]
-    if runRemote:
-        testCaseRunner = SeleniumRunner(currentTestCase, "ssh", host, password)
-    else:
-        testCaseRunner = SeleniumRunner(currentTestCase)
-    exitCode = testCaseRunner.execute()
-    if exitCode != 0:
-        finalExitCode = 1
-    output = testCaseRunner.getStdout()
-    additionalStream = testCaseRunner.getStderr()
-    finalOutputList.append("%s|%s" % 
-        (currentTestName, 
-        'Passed' if exitCode == 0 else 'Failed'))
-    detailObject = {}
-    detailObject.update({'testName': key})
-    detailObject.update({'result': ('Passed' if exitCode == 0 else 'Failed')})
-    detailObject.update({'output': output})
-    if detailObject["result"] == "Passed":
-        addStr = additionalStream.replace('-','').replace('.','',1).replace('\n\n', '  \n').replace('\n','',1)
-    else:
-        addStr = additionalStream
-    detailObject.update({'additionalStream': addStr})
-    finalDetailsList.append(detailObject)
-    
-# report and exit
-# set output variable outputJson
-#outputJson = json.dumps(finalDetailsList, sort_keys=False,
-#                 indent=4, separators=(',', ': '))
-outputJson = finalDetailsList
-
-# print table
-for item in finalOutputList:
-    print(item)
-# print details
-print(' ')
-for item in finalDetailsList:
-    print(' ---  ')
-    print(' ### %s : %s  ' % (item['testName'], item["result"]))
-    print(' %s :  ' % ('Script Output'))
-    print('>%s   ' % ( item["output"]))
-    print('  ')
-    print('  %s :  ' % ('Additional Information'))
-    print('>%s   ' % ( item["additionalStream"]))
-    print('  ')
-    
-if finalExitCode != 0:
-    sys.exit(exitCode)
+        return json.dumps(finalDetailsList), finalExitCode
+        
+        
 
 
 

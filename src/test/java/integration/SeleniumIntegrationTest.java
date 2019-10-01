@@ -17,12 +17,12 @@ import java.io.File;
 
 import java.io.IOException;
 
-import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.skyscreamer.jsonassert.JSONAssert;
-import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import org.testcontainers.containers.DockerComposeContainer;
 
@@ -45,24 +45,47 @@ public class SeleniumIntegrationTest {
     @Test
     public void testSelenium() throws Exception {
         String theResult = SeleniumTestHelper.getSeleniumReleaseResult();
-        System.out.println("RESULT:\n"+theResult);
+        //System.out.println("RESULT:\n"+theResult);
 
         assertTrue(theResult != null);
 
         String expected = SeleniumTestHelper.readFile(SeleniumTestHelper.getResourceFilePath("testExpected/singleMulti.txt"));
-        System.out.println("EXPECTED:\n"+expected);
-
-        try {
-            // Can't use this because times will always be different
-            // TODO: cycle through the objects and compare the pass/fail for each
-            //JSONAssert.assertEquals(expected, theResult, JSONCompareMode.NON_EXTENSIBLE);
-        } catch (Exception e) {
-            System.out.println("FAILED: EXCEPTION: "+e.getMessage());
-            e.printStackTrace();
-        }
-          
+        //System.out.println("EXPECTED:\n"+expected);
+        JSONParser jsonParser = new JSONParser();
         
-        System.out.println("testSelenium passed");
+        Object obj = jsonParser.parse(theResult);
+
+        JSONObject varJson = (JSONObject) obj;
+
+        JSONArray single = (JSONArray) jsonParser.parse((String)varJson.get("${singleTestJson}"));
+        JSONArray multiple = (JSONArray) jsonParser.parse((String)varJson.get("${multipleTestJson}"));
+
+        assertTrue(single != null);
+        assertTrue(multiple != null);
+        assertTrue(single.size() == 1);
+        assertTrue(multiple.size() == 3);
+
+        for (Object selTest : single)  
+        { 
+            JSONObject selJObj = (JSONObject) selTest;
+            assertTrue(((String) selJObj.get("result")).equals("Passed"));
+        } 
+
+        for (Object selTest : multiple)  
+        { 
+            JSONObject selJObj = (JSONObject) selTest;
+            assertTrue(((String) selJObj.get("result")).equals("Passed"));
+        } 
+        
+        System.out.println("/ntestSelenium passed");
 
     }
+
+    private static void parseSelTestObject(JSONObject selTest) {
+
+        // Get testName
+        String testName = (String) selTest.get("testName");
+        System.out.println(testName);
+    }
 }
+

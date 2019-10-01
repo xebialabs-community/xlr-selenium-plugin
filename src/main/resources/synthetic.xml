@@ -23,15 +23,15 @@
     </type>
 
     <type type="selenium.RunSinglePythonTestCase" extends="selenium.Task" description="Run a single selenium testcase using the selenium-python dialect.">
-        <property name="scriptLocation" default="selenium/RunTestCases.py" hidden="true"/>
+        <property name="scriptLocation" default="selenium/start_task.py" hidden="true"/>
 
         <property name="testCaseName" category="input" required="true" label="Test Case Name" description="Give the test case a name"/>
         <property name="testCase" category="input" size="large" required="true" label="Python Test Case" description="Put selenium-python test case code here."/>
-        <property name="outputJson" category="output" kind="string" label="Report in JSON format"/>
+        <property name="reportJson" category="output" kind="string" label="JSON Output" description="Report in JSON format"/>
     </type>
 
     <type type="selenium.RunScriptsRetrievedFromRepository" extends="selenium.Task" description="Retrieve one or more selenium-python test scripts from a remote repository then run the test cases.">
-        <property name="scriptLocation" default="selenium/RunTestCases.py" hidden="true"/>
+        <property name="scriptLocation" default="selenium/start_task.py" hidden="true"/>
         
         <property name="targetURL" category="input" required="true" label="Script Repository Target URL with placeholder" 
             description="Abstracted URL for the script file. Use the special place holder :filename:. Examples: https://server.com/foo/:filename:,  http://host/project1/repo1/:filename:?raw"/>
@@ -44,7 +44,7 @@
             description = "If checked, the task will fail if any one of the files listed above is not found."/>
         <property name="failOnFirstFailure" category="input" kind="boolean" default="false" required="true" label="Fail on first test failure" 
             description = "If checked, the task will fail on the first test failure and stop running. The default behavior is to run and report on all tests and fail the task if there is least one test failure."/>
-        <property name="outputJson" category="output" kind="string" label="Report in JSON format"/>
+        <property name="reportJson" category="output" kind="string" label="Report in JSON format"/>
     </type>
  
 </synthetic>

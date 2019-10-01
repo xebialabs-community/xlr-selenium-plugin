@@ -1,170 +1,182 @@
 [
-    {
-      "id": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72",
-      "type": "xlrelease.Release",
-      "title": "seleniumTemplate",
-      "scheduledStartDate": "2019-09-23T14:00:00Z",
-      "flagStatus": "OK",
-      "overdueNotified": false,
-      "maxConcurrentReleases": 100,
-      "releaseTriggers": [],
-      "teams": [
-        {
-          "id": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/Teamfb598d8881ce428d903b45f538278e55",
-          "type": "xlrelease.Team",
-          "teamName": "Template Owner",
-          "members": [
-            "admin"
-          ],
-          "roles": [],
-          "permissions": [
-            "template#edit",
-            "template#lock_task",
-            "template#view",
-            "template#edit_triggers",
-            "template#edit_security",
-            "template#create_release"
-          ]
-        },
-        {
-          "id": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/Teame5b153d4139548acb307724528f49fb2",
-          "type": "xlrelease.Team",
-          "teamName": "Release Admin",
-          "members": [],
-          "roles": [],
-          "permissions": [
-            "release#edit",
-            "release#lock_task",
-            "release#start",
-            "release#reassign_task",
-            "release#edit_blackout",
-            "template#view",
-            "release#edit_security",
-            "release#abort",
-            "release#view",
-            "release#edit_task"
-          ]
-        }
-      ],
-      "memberViewers": [],
-      "roleViewers": [],
-      "attachments": [],
-      "phases": [
-        {
-          "id": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/Phase1b58ed5df9c24ceebdae92c4ed2ee625",
-          "type": "xlrelease.Phase",
-          "title": "New Phase",
-          "flagStatus": "OK",
-          "overdueNotified": false,
-          "tasks": [
-            {
-              "id": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/Phase1b58ed5df9c24ceebdae92c4ed2ee625/Taske73299fcb71b438c889425a137b6f04f",
-              "type": "xlrelease.CustomScriptTask",
-              "title": "singleTest",
-              "flagStatus": "OK",
-              "overdueNotified": false,
-              "comments": [],
-              "container": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/Phase1b58ed5df9c24ceebdae92c4ed2ee625",
-              "attachments": [],
-              "status": "PLANNED",
-              "waitForScheduledStartDate": true,
-              "delayDuringBlackout": false,
-              "postponedDueToBlackout": false,
-              "hasBeenFlagged": false,
-              "hasBeenDelayed": false,
-              "failuresCount": 0,
-              "variableMapping": {
-                "pythonScript.outputJson": "${singleTestJson}"
-              },
-              "tags": [],
-              "dueSoonNotified": false,
-              "locked": false,
-              "watchers": [],
-              "pythonScript": {
-                "id": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/Phase1b58ed5df9c24ceebdae92c4ed2ee625/Taske73299fcb71b438c889425a137b6f04f/PythonScript",
-                "type": "selenium.RunSinglePythonTestCase",
-                "customScriptTask": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/Phase1b58ed5df9c24ceebdae92c4ed2ee625/Taske73299fcb71b438c889425a137b6f04f",
-                "host": "Configuration/Custom/python-selenium",
-                "testCaseName": "test0",
-                "testCase": "import time\nimport unittest\nimport os\nimport logging\n\nfrom selenium import webdriver\nfrom selenium.webdriver.common.keys import Keys\n\nclass HackerNewsSearchTest(unittest.TestCase):\n\n    def setUp(self):\n        print(\"In setUp\")\n        #caps = {'browserName': os.getenv('BROWSER', 'chrome')}\n        caps = {'browserName': 'firefox'}\n        self.browser = webdriver.Remote(\n            command_executor='http://hub:4444/wd/hub',\n            desired_capabilities=caps)\n        self.logger = logging\n        self.logger.info(\"About to call a test\")\n\n    def test_simple(self):\n        print(\"In simple\")\n        self.logger.info(\"In simple\")\n        browser = self.browser\n        browser.get('http://www.python.org')\n        self.assertIn(\"Python\", browser.title)\n        search_box = browser.find_element_by_name('q')\n        search_box.send_keys('pycon')\n        search_box.send_keys(Keys.RETURN)\n        time.sleep(3) # simulate long running test\n        self.assertIn('pycon', browser.page_source)\n\n    def tearDown(self):\n        print(\"In tearDown\")\n        self.browser.quit() # quit vs close?\n\n\nif __name__ == '__main__':\n    logging.basicConfig(filename='/selenium-plugin.log',level=logging.INFO)\n    logging.info(\"About to call main\")\n    unittest.main()"
-              }
+  {
+    "id": "Applications/Release832b197247d146298a22732556c67e80",
+    "type": "xlrelease.Release",
+    "title": "seleniumTemplate",
+    "scheduledStartDate": "2019-10-01T14:00:00Z",
+    "flagStatus": "OK",
+    "overdueNotified": false,
+    "maxConcurrentReleases": 100,
+    "releaseTriggers": [],
+    "teams": [
+      {
+        "id": "Applications/Release832b197247d146298a22732556c67e80/Team397f66059fd5413f9318ff6d10486442",
+        "type": "xlrelease.Team",
+        "teamName": "Release Admin",
+        "members": [],
+        "roles": [],
+        "permissions": [
+          "release#edit_precondition",
+          "release#edit",
+          "release#reassign_task",
+          "release#edit_security",
+          "release#view",
+          "release#lock_task",
+          "release#start",
+          "release#edit_blackout",
+          "template#view",
+          "release#edit_failure_handler",
+          "release#abort",
+          "release#edit_task"
+        ]
+      },
+      {
+        "id": "Applications/Release832b197247d146298a22732556c67e80/Team00013548f8874a5a86758d15d7348bff",
+        "type": "xlrelease.Team",
+        "teamName": "Template Owner",
+        "members": [
+          "admin"
+        ],
+        "roles": [],
+        "permissions": [
+          "template#edit",
+          "template#lock_task",
+          "template#view",
+          "template#edit_triggers",
+          "template#edit_precondition",
+          "template#edit_security",
+          "template#create_release",
+          "template#edit_failure_handler"
+        ]
+      }
+    ],
+    "memberViewers": [],
+    "roleViewers": [],
+    "attachments": [],
+    "phases": [
+      {
+        "id": "Applications/Release832b197247d146298a22732556c67e80/Phase0d231744c83a4d2dafe2beacb826edc4",
+        "type": "xlrelease.Phase",
+        "title": "New Phase",
+        "flagStatus": "OK",
+        "overdueNotified": false,
+        "tasks": [
+          {
+            "id": "Applications/Release832b197247d146298a22732556c67e80/Phase0d231744c83a4d2dafe2beacb826edc4/Task997ff2a90ca74031b9e1798adc258b2c",
+            "type": "xlrelease.CustomScriptTask",
+            "title": "singleTest",
+            "flagStatus": "OK",
+            "overdueNotified": false,
+            "comments": [],
+            "container": "Applications/Release832b197247d146298a22732556c67e80/Phase0d231744c83a4d2dafe2beacb826edc4",
+            "facets": [],
+            "attachments": [],
+            "status": "PLANNED",
+            "waitForScheduledStartDate": true,
+            "delayDuringBlackout": false,
+            "postponedDueToBlackout": false,
+            "hasBeenFlagged": false,
+            "hasBeenDelayed": false,
+            "taskFailureHandlerEnabled": false,
+            "failuresCount": 0,
+            "variableMapping": {
+              "pythonScript.reportJson": "${singleTestJson}"
             },
-            {
-              "id": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/Phase1b58ed5df9c24ceebdae92c4ed2ee625/Task91590a12b72d476c892fb7d3005ba354",
-              "type": "xlrelease.CustomScriptTask",
-              "title": "multipleRetrievedTests",
-              "flagStatus": "OK",
-              "overdueNotified": false,
-              "comments": [],
-              "container": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/Phase1b58ed5df9c24ceebdae92c4ed2ee625",
-              "attachments": [],
-              "status": "PLANNED",
-              "waitForScheduledStartDate": true,
-              "delayDuringBlackout": false,
-              "postponedDueToBlackout": false,
-              "hasBeenFlagged": false,
-              "hasBeenDelayed": false,
-              "failuresCount": 0,
-              "variableMapping": {
-                "pythonScript.outputJson": "${multipleTestJson}"
+            "tags": [],
+            "dueSoonNotified": false,
+            "locked": false,
+            "checkAttributes": false,
+            "watchers": [],
+            "pythonScript": {
+              "id": "Applications/Release832b197247d146298a22732556c67e80/Phase0d231744c83a4d2dafe2beacb826edc4/Task997ff2a90ca74031b9e1798adc258b2c/PythonScript",
+              "type": "selenium.RunSinglePythonTestCase",
+              "customScriptTask": "Applications/Release832b197247d146298a22732556c67e80/Phase0d231744c83a4d2dafe2beacb826edc4/Task997ff2a90ca74031b9e1798adc258b2c",
+              "host": "Configuration/Custom/python-selenium",
+              "testCaseName": "test0",
+              "testCase": "import time\nimport unittest\nimport os\nimport logging\n\nfrom selenium import webdriver\nfrom selenium.webdriver.common.keys import Keys\n\nclass PythonOrgSearchTest(unittest.TestCase):\n\n    def setUp(self):\n        print(\"In setUp\")\n        caps = {'browserName': 'firefox'}\n        self.browser = webdriver.Remote(\n            command_executor='http://hub:4444/wd/hub',\n            desired_capabilities=caps)\n        self.logger = logging\n        self.logger.info(\"About to call a test\")\n\n    def test_simple(self):\n        print(\"In simple\")\n        self.logger.info(\"In simple\")\n        browser = self.browser\n        browser.get('http://www.python.org')\n        self.assertIn(\"Python\", browser.title)\n        search_box = browser.find_element_by_name('q')\n        search_box.send_keys('pycon')\n        search_box.send_keys(Keys.RETURN)\n        time.sleep(3) # simulate long running test\n        self.assertIn('pycon', browser.page_source)\n\n    def tearDown(self):\n        print(\"In tearDown\")\n        self.browser.quit() # quit vs close?\n\n\nif __name__ == '__main__':\n    logging.basicConfig(filename='/selenium-plugin.log',level=logging.INFO)\n    logging.info(\"About to call main\")\n    unittest.main()"
+            },
+            "keepPreviousOutputPropertiesOnRetry": false
+          },
+          {
+            "id": "Applications/Release832b197247d146298a22732556c67e80/Phase0d231744c83a4d2dafe2beacb826edc4/Task500dc8e713e14a32abb3f6d5951433d6",
+            "type": "xlrelease.CustomScriptTask",
+            "title": "multipleTest",
+            "flagStatus": "OK",
+            "overdueNotified": false,
+            "comments": [],
+            "container": "Applications/Release832b197247d146298a22732556c67e80/Phase0d231744c83a4d2dafe2beacb826edc4",
+            "facets": [],
+            "attachments": [],
+            "status": "PLANNED",
+            "waitForScheduledStartDate": true,
+            "delayDuringBlackout": false,
+            "postponedDueToBlackout": false,
+            "hasBeenFlagged": false,
+            "hasBeenDelayed": false,
+            "taskFailureHandlerEnabled": false,
+            "failuresCount": 0,
+            "variableMapping": {
+              "pythonScript.reportJson": "${multipleTestJson}"
+            },
+            "tags": [],
+            "dueSoonNotified": false,
+            "locked": false,
+            "checkAttributes": false,
+            "watchers": [],
+            "pythonScript": {
+              "id": "Applications/Release832b197247d146298a22732556c67e80/Phase0d231744c83a4d2dafe2beacb826edc4/Task500dc8e713e14a32abb3f6d5951433d6/PythonScript",
+              "type": "selenium.RunScriptsRetrievedFromRepository",
+              "customScriptTask": "Applications/Release832b197247d146298a22732556c67e80/Phase0d231744c83a4d2dafe2beacb826edc4/Task500dc8e713e14a32abb3f6d5951433d6",
+              "host": "Configuration/Custom/python-selenium",
+              "targetURL": "http://mockserver:5000/project1/repo1/:filename:",
+              "repositoryUsername": "xlr_test",
+              "repositoryPassword": "admin",
+              "fileMap": {
+                "test2": "test2.py",
+                "test3": "test3.py",
+                "test1": "test1.py"
               },
-              "tags": [],
-              "dueSoonNotified": false,
-              "locked": false,
-              "watchers": [],
-              "pythonScript": {
-                "id": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/Phase1b58ed5df9c24ceebdae92c4ed2ee625/Task91590a12b72d476c892fb7d3005ba354/PythonScript",
-                "type": "selenium.RunScriptsRetrievedFromRepository",
-                "customScriptTask": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/Phase1b58ed5df9c24ceebdae92c4ed2ee625/Task91590a12b72d476c892fb7d3005ba354",
-                "host": "Configuration/Custom/python-selenium",
-                "targetURL": "http://mockserver:5000/project1/repo1/:filename:",
-                "repositoryUsername": "xlr_test",
-                "repositoryPassword": "admin",
-                "fileMap": {
-                  "test2": "test2.py",
-                  "test3": "test3.py",
-                  "test1": "test1.py"
-                },
-                "failIfFileNotFound": false,
-                "failOnFirstFailure": false
-              }
-            }
-          ],
-          "release": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72",
-          "status": "PLANNED"
-        }
-      ],
-      "queryableStartDate": "2019-09-23T14:00:00Z",
-      "realFlagStatus": "OK",
-      "status": "TEMPLATE",
-      "tags": [],
-      "variables": [
-        {
-          "id": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/Variablea5c1944d3c7e4c4a8404e90c96eeba68",
-          "type": "xlrelease.StringVariable",
-          "key": "singleTestJson",
-          "requiresValue": false,
-          "showOnReleaseStart": false
-        },
-        {
-          "id": "Applications/Release1a6ade3cd349449fbe9cf8fc09c9ef72/Variablee20338756e664a02896829d86f3fd2e7",
-          "type": "xlrelease.StringVariable",
-          "key": "multipleTestJson",
-          "requiresValue": false,
-          "showOnReleaseStart": false
-        }
-      ],
-      "calendarPublished": false,
-      "tutorial": false,
-      "abortOnFailure": false,
-      "allowConcurrentReleasesFromTrigger": true,
-      "runningTriggeredReleasesCount": 0,
-      "createdFromTrigger": false,
-      "extensions": [],
-      "autoStart": false,
-      "automatedResumeCount": 0,
-      "riskScore": "000",
-      "totalRiskScore": "0000",
-      "riskProfile": "Configuration/riskProfiles/RiskProfileDefault"
-    }
-  ]
+              "failIfFileNotFound": false,
+              "failOnFirstFailure": false
+            },
+            "keepPreviousOutputPropertiesOnRetry": false
+          }
+        ],
+        "release": "Applications/Release832b197247d146298a22732556c67e80",
+        "status": "PLANNED"
+      }
+    ],
+    "queryableStartDate": "2019-10-01T14:00:00Z",
+    "realFlagStatus": "OK",
+    "status": "TEMPLATE",
+    "tags": [],
+    "variables": [
+      {
+        "id": "Applications/Release832b197247d146298a22732556c67e80/Variable2e8438447c8e4dc4968d5e3225b20618",
+        "type": "xlrelease.StringVariable",
+        "key": "singleTestJson",
+        "requiresValue": false,
+        "showOnReleaseStart": false
+      },
+      {
+        "id": "Applications/Release832b197247d146298a22732556c67e80/Variable65d1ecc042fb4b739867fe7ee211b392",
+        "type": "xlrelease.StringVariable",
+        "key": "multipleTestJson",
+        "requiresValue": false,
+        "showOnReleaseStart": false
+      }
+    ],
+    "calendarPublished": false,
+    "tutorial": false,
+    "abortOnFailure": false,
+    "allowConcurrentReleasesFromTrigger": true,
+    "runningTriggeredReleasesCount": 0,
+    "createdFromTrigger": false,
+    "extensions": [],
+    "autoStart": false,
+    "automatedResumeCount": 0,
+    "riskScore": "000",
+    "totalRiskScore": "0000",
+    "riskProfile": "Configuration/riskProfiles/Default risk profile"
+  }
+]

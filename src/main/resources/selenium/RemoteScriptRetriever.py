@@ -22,8 +22,8 @@ class RemoteScriptRetriever():
         self.repositoryPassword = repositoryPassword
         self.failIfFileNotFound = failIfFileNotFound
         self.targetURL = targetURL
-        self.logger.debug("targertURL = %s, repositoryUsername=%s,  repositoryPassword=%s, failIfFileNotFound=%s" %
-            (targetURL, repositoryUsername, repositoryPassword, str(failIfFileNotFound)))
+        self.logger.debug("targertURL = %s, repositoryUsername=%s,  failIfFileNotFound=%s" %
+            (targetURL, repositoryUsername, str(failIfFileNotFound)))
     
 
     def getData(self, fileName):
@@ -43,14 +43,13 @@ class RemoteScriptRetriever():
 
             # If user has configured for failure if a file is not retrieved
             if self.failIfFileNotFound:
-                self.logger.debug('File Not Found: %s'% self.targetURL)
-                print ("File not found - %s" % self.targetURL)
+                self.logger.debug('File Not Found: %s'% url)
+                print ("File not found - %s" % url)
                 sys.exit(1)
             else:
                 return data
         else:
-            data = response.read(100000) # read up to 100 000 chars 
-            #self.logger.debug("Filename: %s - Content: %s " % (fileName, data))
+            data = response.read(200000) # read up to 200 000 chars 
         return data
 
 

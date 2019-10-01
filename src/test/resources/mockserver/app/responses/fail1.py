@@ -20,12 +20,12 @@ class PythonOrgSearchTest1(unittest.TestCase):
 
     def setUp(self):
         print("In setUp")
-        caps = {'browserName': 'chrome'}
+        caps = {'browserName': 'firefox'}
         self.browser = webdriver.Remote(
             command_executor='http://hub:4444/wd/hub',
             desired_capabilities=caps)
         self.logger = logging
-        self.logger.info("About to call a test, testing Chrome")
+        self.logger.info("About to call a test, should fail because element name is wrong")
 
     def test_simple(self):
         print("In simple")
@@ -33,7 +33,7 @@ class PythonOrgSearchTest1(unittest.TestCase):
         browser = self.browser
         browser.get('http://www.python.org')
         self.assertIn("Python", browser.title)
-        search_box = browser.find_element_by_name('q')
+        search_box = browser.find_element_by_name('notThere')
         search_box.send_keys('pycon')
         search_box.send_keys(Keys.RETURN)
         time.sleep(3) # simulate long running test

@@ -20,7 +20,6 @@ class PythonOrgSearchTest3(unittest.TestCase):
 
     def setUp(self):
         print("In setUp")
-        #caps = {'browserName': os.getenv('BROWSER', 'chrome')}
         caps = {'browserName': 'firefox'}
         self.browser = webdriver.Remote(
             command_executor='http://hub:4444/wd/hub',

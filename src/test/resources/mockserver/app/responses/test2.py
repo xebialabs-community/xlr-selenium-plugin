@@ -20,13 +20,12 @@ class PythonOrgSearchTest2(unittest.TestCase):
 
     def setUp(self):
         print("In setUp")
-        #caps = {'browserName': os.getenv('BROWSER', 'chrome')}
         caps = {'browserName': 'firefox'}
         self.browser = webdriver.Remote(
             command_executor='http://hub:4444/wd/hub',
             desired_capabilities=caps)
         self.logger = logging
-        self.logger.info("About to call a test")
+        self.logger.info("About to call a test, testing firefox")
 
     def test_simple(self):
         print("In simple")

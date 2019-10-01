@@ -20,7 +20,7 @@ wget --http-user=admin --http-password=admin --auth-no-challenge \
      --header="Accept: application/json" \
      --header="Content-type: application/json" \
      --post-file=$SCRIPTPATH/data/server-configs.json \
-    http://localhost:5516/api/v1/config -O /dev/null
+    http://localhost:15516/api/v1/config -O /dev/null
 
 ####################### XLR server data - template release-template-selenium.json
 echo "Load Template-All"
@@ -29,5 +29,5 @@ wget --http-user=admin --http-password=admin --auth-no-challenge \
      --header="Accept: application/json" \
      --header="Content-type: application/json" \
      --post-file=$SCRIPTPATH/data/release-template-selenium.json \
-    http://localhost:5516/api/v1/templates/import -O /dev/null
+    http://localhost:15516/api/v1/templates/import -O /dev/null
 

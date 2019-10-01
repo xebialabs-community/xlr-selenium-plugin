@@ -20,12 +20,12 @@ class PythonOrgSearchTest1(unittest.TestCase):
 
     def setUp(self):
         print("In setUp")
-        caps = {'browserName': 'chrome'}
+        caps = {'browserName': 'ie'}
         self.browser = webdriver.Remote(
             command_executor='http://hub:4444/wd/hub',
             desired_capabilities=caps)
         self.logger = logging
-        self.logger.info("About to call a test, testing Chrome")
+        self.logger.info("About to call a test, should fail because web driver is not available")
 
     def test_simple(self):
         print("In simple")

@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 class SeleniumRunner():
     def __init__(self, script, connectionType=None, host=None, password=None):
         self.logger = logger
-        self.logger.debug("In Selenium Runner init")
+        # self.logger.debug("In Selenium Runner init")
         self.script = script
         
         self.connectionType = connectionType
