@@ -12,7 +12,7 @@ deploy:
     api_key:
       secure: QLSkR9lfV2ySMI9Pkb/yQ0mNTve5rxEeZmEb8QfZ/bqieiT/ZXAoEfHgJOSp64nIULd/wxRpVmysSkh27EOEtoM2Zk8qJPScT7zYeuHUE+IL84x4zw0Z2AFWGxixDuHwo/y46axlUPAWvpK1Fanncbz2vcbw3ABodGRwhcTOlFUPG/abXRH9AqhmmAnyw/xtsNCnVruB4FYVuHCmH9zDiiMhq92ZLDnxG6gFeJA3NVhldSMVbHBnNOpYpFXbblg/MgbJSIak07qPoPA0QYErDHi0igrBUpXAJnTbAJvqRXaZSQTzgIeSoxESV7QZNXnQhC/u/5cZkxl/KObDvkGzgCq43Oo0WutHwcC4RNKo9ASALuxZ1Ea066vnMzqHAOVZ2KDvUF3pMcxu940/GzsNQAh3TwiIcCIvNIoyUFj9t1wh+ykoKewbhYWOIcCRNTfYyYLGd/gYJ85hno4U8AQNm54V1hXvzTNj5gT5gmKP5hyiPbDTQqX2yIzPLWSIMVbMg4V2VC9J6LywSSIDzmVO+P/AcA1hHwRzZSHU5Lq0GPMisjfRajPL57uSyIkDpkROSJW/To7TR0d6y+3et6pAfdtxlTEDFg7OH5m8HFQXez4U12hP9NINP8k5XE+rmIagi/e68YauPCNT0k/Q5L8VFTOL6MuttrVQJM797ebBtK0=
     file_glob: true
-    file: build/libs/*
+    file: build/libs/*.jar
     skip_cleanup: true
     on:
       all_branches: true
