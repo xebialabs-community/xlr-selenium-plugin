@@ -128,7 +128,7 @@ Build and package the plugin with...
 ### To run integration tests - 
 1.  You will need to have Docker and Docker Compose installed 
 2.  The XL-Release image expects to find a valid XL-Release license on your machine, at this location: ~xl-licenses/xl-release-license.lic
-3.  Open a terminal in the root of the xlr-variable-setter-plugin project and run the test - 
+3.  Open a terminal in the root of the xlr-selenium-plugin project and run the test - 
 
 ```bash
 ./gradlew clean integrationTest
