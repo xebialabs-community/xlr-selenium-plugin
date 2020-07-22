@@ -127,7 +127,7 @@ Build and package the plugin with...
 
 ### To run integration tests - 
 1.  You will need to have Docker and Docker Compose installed 
-2.  The XL-Release image expects to find a valid XL-Release license on your machine, at this location: ~xl-licenses/xl-release-license.lic
+2.  The XL-Release image will use a Community license. Note that by using this license, you are accepting the End User License Agreement. https://dist.xebialabs.com/public/legal/eula-artifacts-v10.txt
 3.  Open a terminal in the root of the xlr-selenium-plugin project and run the test - 
 
 ```bash
